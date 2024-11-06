@@ -35,7 +35,7 @@ export default function Home() {
           <TextReveal className="font-semibold">Dimuth Nilanjana</TextReveal>
         </Link>
       </Transition>
-      {/* <Header social={social_handles} /> */}
+      <Header  />
       <Hero />
       <About  />
       <Experience />
