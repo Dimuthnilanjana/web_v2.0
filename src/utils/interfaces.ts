@@ -2,15 +2,6 @@
 
 
 
-export interface About {
-  name: string;
-  title: string;
-  subTitle: string;
-  description: string;
-  quote: string;
-  avatar: Avatar;
- 
-}
 
 export interface Avatar {
   public_id: string;
@@ -69,8 +60,8 @@ export interface Timeline {
   company_name: string;
   summary: string;
   sequence: number;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate:string;
   jobTitle: string;
   jobLocation: string;
   bulletPoints: string[];

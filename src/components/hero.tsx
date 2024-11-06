@@ -6,14 +6,15 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { PageLoad } from "./ui/page-load";
+import Typewriter from "typewriter-effect";
 
 export const Hero = () => {
   const [hideLoader, setHideLoader] = useState(true);
 
   // Hardcoded about data
   const about = {
-    name: "John Doe",
-    title: "Software Developer",
+    name: "Dimuth Nilanjana",
+    title: ["Software Engineer", "UI Designer"], // Array of titles for typewriter effect
     subTitle: "Creating 3D visuals and web applications",
     avatar: {
       url: "/shared/ai-generated-8083323_1280.jpg", // Replace with your actual path or URL
@@ -41,8 +42,16 @@ export const Hero = () => {
               <h2 className="md:text-7xl text-4xl font-bold overflow-hidden">
                 <SlideIn>Hello! I&apos;m {about.name}</SlideIn>
               </h2>
-              <h1 className="md:text-7xl text-3xl overflow-hidden">
-                <SlideIn>{about.title}</SlideIn>
+              <h1 className="md:text-7xl text-3xl overflow-hidden flex justify-center items-center pb-2">
+                <Typewriter
+                  options={{
+                    strings: about.title,
+                    autoStart: true,
+                    loop: true,
+                    delay: 75,
+                    deleteSpeed: 50,
+                  }}
+                />
               </h1>
             </div>
             <Transition viewport={{ once: true }} className="w-full">

@@ -11,13 +11,13 @@ const Experience = () => {
   const experienceData: Timeline[] = [
     {
       _id: "1",
-      company_name: "CloudTech Innovations",
+      company_name: "Epic Lanka Private Limited",
       summary: "Contributed to the development of a cloud-based SaaS platform for managing IT infrastructure.",
       sequence: 4,
-      startDate: new Date("2024-03-06"),
-      endDate: new Date("2024-03-20"),
-      jobTitle: "Software Developer",
-      jobLocation: "Austin, TX",
+      startDate:"JULY . 2024" ,
+      endDate: "JULY . 2024",
+      jobTitle: "UI/UX Engineer",
+      jobLocation: "Colombo . Sri Lanka",
       bulletPoints: [
         "Developed microservices using Node.js and deployed them using Docker containers.",
         "Implemented user authentication and authorization using OAuth 2.0 and JWT tokens.",
@@ -63,15 +63,15 @@ const Experience = () => {
               </div>
               <div className="max-md:text-sm max-md:flex flex-col text-foreground/50">
                 <span className="italic">
-                  {formatDate(exp.startDate.toISOString()).month +
+                  {formatDate(exp.startDate).month +
                     ", " +
-                    formatDate(exp.startDate.toISOString()).year}
+                    formatDate(exp.startDate).year}
                 </span>
                 <span className="max-md:hidden">{" - "}</span>
                 <span className="italic">
-                  {formatDate(exp.endDate.toISOString()).month +
+                  {formatDate(exp.endDate).month +
                     ", " +
-                    formatDate(exp.endDate.toISOString()).year}
+                    formatDate(exp.endDate).year}
                 </span>
               </div>
             </div>

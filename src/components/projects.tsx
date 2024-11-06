@@ -21,10 +21,40 @@ const hardcodedProjects = [
     },
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    techStack: ["Reactjs", "Nextjs", "Mern", "CSS"],
+    techStack: ["Reactjs"],
     enabled: true,
   },
   // Add more projects as needed
+  {
+    _id: "1",
+    liveUrl: "https://dimuthnilanjana-com.vercel.app/",
+    githuburl: "https://dimuthnilanjana-com.vercel.app/",
+    title: "Project 12",
+    sequence: 12,
+    image: {
+      public_id: "1706285416017-wra7swm",
+      url: "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285416017-wra7swm",
+    },
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    techStack: ["Reactjs"],
+    enabled: true,
+  },
+  {
+    _id: "2",
+    liveUrl: "https://dimuthnilanjana-com.vercel.app/",
+    githuburl: "https://dimuthnilanjana-com.vercel.app/",
+    title: "Project 12",
+    sequence: 12,
+    image: {
+      public_id: "1706285416017-wra7swm",
+      url: "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285416017-wra7swm",
+    },
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    techStack: ["Nextjs"],
+    enabled: true,
+  },
 ];
 
 const Projects = () => {

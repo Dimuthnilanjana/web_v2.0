@@ -19,11 +19,11 @@ import { Hero } from "@/components/hero";
 
 export default function Home() {
   const {
-    about,
+    
     
     services,
     skills,
-    projects,
+    
     
     
   } = hardcodedData;
@@ -39,23 +39,44 @@ export default function Home() {
       <Hero />
       <About  />
       <Experience />
+     
+
       {/* ===SKILLS SECTION=== */}
-      <section id="skills">
-        <ParallaxText baseVelocity={-5}>
-          {skills
-            .sort((a, b) => a.sequence - b.sequence)
-            .map((skill) =>
-              skill.enabled ? (
-                <span
-                  key={skill._id}
-                  className="md:text-7xl text-xl font-semibold uppercase text-white/30"
-                >
-                  {skill.name} •
-                </span>
-              ) : null
-            )}
-        </ParallaxText>
-      </section>
+<section id="skills" className="space-y-4">
+  {/* Line moving to the right */}
+  <ParallaxText baseVelocity={5}>
+    {skills
+      .sort((a, b) => a.sequence - b.sequence)
+      .map((skill) =>
+        skill.enabled ? (
+          <span
+            key={skill._id}
+            className="md:text-7xl text-xl font-semibold uppercase text-white/30"
+          >
+            {skill.name} •
+          </span>
+        ) : null
+      )}
+  </ParallaxText>
+
+  {/* Line moving to the left */}
+  <ParallaxText baseVelocity={-5}>
+    {skills
+      .sort((a, b) => a.sequence - b.sequence)
+      .map((skill) =>
+        skill.enabled ? (
+          <span
+            key={skill._id}
+            className="md:text-7xl text-xl font-semibold uppercase text-white/30"
+          >
+            {skill.name} •
+          </span>
+        ) : null
+      )}
+  </ParallaxText>
+</section>
+
+      
       {/* ===SERVICES SECTION=== */}
       <section className="px-2 py-20 relative" id="services">
         <span className="blob absolute top-[20%] right-0 w-1/3 h-5/6 blur-[100px] rotate-180 -z-10" />

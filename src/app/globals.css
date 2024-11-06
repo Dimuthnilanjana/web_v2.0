@@ -58,7 +58,8 @@
 }
 
 .blob {
-  background: conic-gradient(from 2.35rad, #c76000, rgba(7, 29, 228, 0.5));
+  background: conic-gradient(from 2.35rad, #1768c5, rgba(7, 29, 228, 0.5));
+  /* background: conic-gradient(from 2.35rad, #c76000, rgba(7, 29, 228, 0.5)); */
 }
 
 .linkContainer {

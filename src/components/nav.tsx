@@ -57,30 +57,7 @@ const Nav = ({ setIsActive, social }: NavProps) => {
         })}
       </div>
 
-      {/* Social Links */}
-      <motion.div className="flex flex-wrap">
-        {Array.isArray(social) && social.length > 0 ? (
-          social.map((link, i) => {
-            const { platform, _id, url } = link;
-            return (
-              <MotionLink
-                href={url}
-                className="w-1/2 mt-1 text-background"
-                variants={slideIn}
-                custom={i}
-                initial="initial"
-                animate="enter"
-                exit="exit"
-                key={_id}
-              >
-                <TextReveal>{platform}</TextReveal>
-              </MotionLink>
-            );
-          })
-        ) : (
-          <p>No social links available</p>
-        )}
-      </motion.div>
+     
     </div>
   );
 };

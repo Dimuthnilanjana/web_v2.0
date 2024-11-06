@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+import axios from "axios";
 import {
   Input,
   SectionHeading,
@@ -9,35 +11,59 @@ import {
   TextReveal,
   Transition,
 } from "./ui";
-import { ReactNode } from "react";
 import { cn } from "@/utils/cn";
-
 import Link from "next/link";
 
-
-
-// Hardcoded data for the ContactUs component
-const hardcodedEmail = "contact@example.com";
-
-
-
-
 export const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [formStatus, setFormStatus] = useState("");
+  
+  // Handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [id]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("https://api.web3forms.com/submit", {
+        access_key: "fce4db1a-5b5f-4843-b732-15b445f99b0c",
+        ...formData,
+      });
+      setFormStatus("Form submitted successfully!");
+      console.log("Form submitted:", response);
+    } catch (error) {
+      setFormStatus("Failed to submit the form. Please try again.");
+      console.error("Error submitting the form:", error);
+    }
+  };
+
   return (
     <motion.section className="relative">
       <span className="blob size-1/2 absolute top-20 right-0 blur-[100px]" />
       <div className="p-4 md:p-8 md:px-16">
-        <SectionHeading className="">
-          <SlideIn className="text-white/40">Interested in talking,</SlideIn>{" "}
-          <br /> <SlideIn>let’s do it.</SlideIn>
+        <SectionHeading>
+          <SlideIn className="text-white/40">Interested in talking,</SlideIn> <br />
+          <SlideIn>let’s do it.</SlideIn>
         </SectionHeading>
+
         <div className="grid md:grid-cols-2 gap-10 md:pt-16">
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex gap-4">
               <Transition className="w-full">
                 <Input
-                  id="full-name"
+                  id="fullName"
                   placeholder="Full name"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
                   className="border-0 border-b rounded-none"
                 />
               </Transition>
@@ -46,62 +72,76 @@ export const ContactUs = () => {
                   id="email"
                   placeholder="Email"
                   type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="border-0 border-b rounded-none"
                 />
               </Transition>
             </div>
-            <div className="space-y-2">
-              <Transition>
-                <Input
-                  id="subject"
-                  placeholder="Enter the subject"
-                  className="border-0 border-b rounded-none"
-                />
-              </Transition>
-            </div>
-            <div className="space-y-2">
-              <Transition>
-                <Textarea
-                  className="min-h-[100px] rounded-none border-0 border-b resize-none"
-                  id="message"
-                  placeholder="Enter your message"
-                />
-              </Transition>
-            </div>
-            <div>
-              <Transition>
-                <motion.button
-                  whileHover="whileHover"
-                  initial="initial"
-                  className="border border-white/30 px-8 py-2 rounded-3xl relative overflow-hidden"
-                >
-                  <TextReveal className="uppercase">discuss project</TextReveal>
-                </motion.button>
-              </Transition>
-            </div>
-          </div>
+            <Transition>
+              <Input
+                id="subject"
+                placeholder="Enter the subject"
+                value={formData.subject}
+                onChange={handleInputChange}
+                className="border-0 border-b rounded-none"
+              />
+            </Transition>
+            <Transition>
+              <Textarea
+                id="message"
+                placeholder="Enter your message"
+                value={formData.message}
+                onChange={handleInputChange}
+                className="min-h-[100px] rounded-none border-0 border-b resize-none"
+              />
+            </Transition>
+            <Transition>
+              <motion.button
+                type="submit"
+                whileHover="whileHover"
+                className="border border-white/30 px-8 py-2 rounded-3xl relative overflow-hidden"
+              >
+                <TextReveal className="uppercase">Discuss Project</TextReveal>
+              </motion.button>
+            </Transition>
+            {formStatus && (
+              <div className="text-white/80 mt-4">{formStatus}</div>
+            )}
+          </form>
+          {/* contact */}
           <div className="md:justify-self-end flex flex-col">
-            <div className="pb-4">
-              <Transition>
-                <span className="text-white/90">Get in touch</span>
-              </Transition>
-              <div className="text-2xl md:text-4xl font-bold py-2">
-                <Transition>
-                  <TextReveal>{hardcodedEmail}</TextReveal>
-                </Transition>
-              </div>
-              <Transition>
-                <div className="pb-1 text-white/80">348834</div>
-              </Transition>
-              <Transition>
-                <div className="text-white/80">asfsafsfs</div>
-              </Transition>
-            </div>
+  <div className="pb-4">
+    <Transition>
+      <span className="text-white/90">Get in touch</span>
+    </Transition>
+    <div className="text-xl md:text-3xl font-bold py-2">
+      <Transition>
+        <TextReveal>dimuthnilanjana.official@gmail.com</TextReveal>
+      </Transition>
+    </div>
+    <Transition>
+      <div className="pb-1 text-white/80">+94 70 218 2603</div>
+    </Transition>
 
-           
-          </div>
+    {/* Social Media Links */}
+    <div className="flex space-x-4 pt-4">
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
+        LinkedIn
+      </a>
+      <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
+        GitHub
+      </a>
+      <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
+        Instagram
+      </a>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
+      
       <footer className="flex items-center justify-between md:px-8 px-2 py-4 text-sm">
         <Transition>
           <div>&copy; {new Date().getFullYear()} ThePortfolio</div>
@@ -110,43 +150,14 @@ export const ContactUs = () => {
           <p>
             developed by @
             <Link
-              href={"https://twitter.com/tehseen_type"}
+              href={"https://twitter.com/Dimuthnilanjana"}
               className="hover:underline"
             >
-              tehseen
+              Dimuth Nilanjana
             </Link>
           </p>
         </Transition>
       </footer>
     </motion.section>
-  );
-};
-
-interface BackgroundScaleProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export const BackgroundScale = ({
-  children,
-  className,
-}: BackgroundScaleProps) => {
-  return (
-    <motion.div
-      whileHover="whileHover"
-      whileFocus="whileHover"
-      whileTap="whileHover"
-      initial="initial"
-      className={cn("relative p-1 group", className)}
-    >
-      <motion.span
-        variants={{
-          initial: { scaleY: 0 },
-          whileHover: { scaleY: 1 },
-        }}
-        className="absolute top-0 left-0 h-full w-full bg-primary -z-10 group-hover:text-black"
-      />
-      {children}
-    </motion.div>
   );
 };
