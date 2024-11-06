@@ -1,6 +1,5 @@
 "use client";
 
-import { formatDate } from "@/utils";
 import { Timeline } from "@/utils/interfaces";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -12,10 +11,11 @@ const Experience = () => {
     {
       _id: "1",
       company_name: "Epic Lanka Private Limited",
-      summary: "Contributed to the development of a cloud-based SaaS platform for managing IT infrastructure.",
+      summary:
+        "Contributed to the development of a cloud-based SaaS platform for managing IT infrastructure.",
       sequence: 4,
-      startDate:"JULY . 2024" ,
-      endDate: "JULY . 2024",
+      startDate: "JULY . 2024",
+      endDate: "PRESENT",
       jobTitle: "UI/UX Engineer",
       jobLocation: "Colombo . Sri Lanka",
       bulletPoints: [
@@ -23,7 +23,7 @@ const Experience = () => {
         "Implemented user authentication and authorization using OAuth 2.0 and JWT tokens.",
         "Integrated with cloud providers such as AWS and Azure to manage infrastructure resources.",
         "Designed and implemented RESTful APIs for various platform features.",
-        "Collaborated with DevOps engineers to automate deployment and testing processes."
+        "Collaborated with DevOps engineers to automate deployment and testing processes.",
       ],
       forEducation: false,
       enabled: true,
@@ -62,17 +62,9 @@ const Experience = () => {
                 </PerspectiveText>
               </div>
               <div className="max-md:text-sm max-md:flex flex-col text-foreground/50">
-                <span className="italic">
-                  {formatDate(exp.startDate).month +
-                    ", " +
-                    formatDate(exp.startDate).year}
-                </span>
+                <span className="italic">{exp.startDate}</span>
                 <span className="max-md:hidden">{" - "}</span>
-                <span className="italic">
-                  {formatDate(exp.endDate).month +
-                    ", " +
-                    formatDate(exp.endDate).year}
-                </span>
+                <span className="italic">{exp.endDate}</span>
               </div>
             </div>
             <div className="md:pl-12 py-2 text-foreground/50 max-md:text-sm flex items-center justify-between">
