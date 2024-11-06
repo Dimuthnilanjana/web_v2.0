@@ -21,24 +21,36 @@ export const ContactUs = () => {
     subject: "",
     message: "",
   });
-
   const [formStatus, setFormStatus] = useState("");
-  
+  const [validationMessage, setValidationMessage] = useState("");
+
+  // Check if all fields are filled
+  const isFormValid = () =>
+    formData.fullName && formData.email && formData.subject && formData.message;
+
   // Handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [id]: value }));
+    setValidationMessage(""); // Clear validation message on input change
   };
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid()) {
+      setValidationMessage("Please fill in all fields before submitting.");
+      return;
+    }
     try {
       const response = await axios.post("https://api.web3forms.com/submit", {
         access_key: "fce4db1a-5b5f-4843-b732-15b445f99b0c",
         ...formData,
       });
       setFormStatus("Form submitted successfully!");
+      setFormData({ fullName: "", email: "", subject: "", message: "" }); // Reset form
       console.log("Form submitted:", response);
     } catch (error) {
       setFormStatus("Failed to submit the form. Please try again.");
@@ -51,7 +63,8 @@ export const ContactUs = () => {
       <span className="blob size-1/2 absolute top-20 right-0 blur-[100px]" />
       <div className="p-4 md:p-8 md:px-16">
         <SectionHeading>
-          <SlideIn className="text-white/40">Interested in talking,</SlideIn> <br />
+          <SlideIn className="text-white/40">Interested in talking,</SlideIn>{" "}
+          <br />
           <SlideIn>let’s do it.</SlideIn>
         </SectionHeading>
 
@@ -100,48 +113,70 @@ export const ContactUs = () => {
               <motion.button
                 type="submit"
                 whileHover="whileHover"
-                className="border border-white/30 px-8 py-2 rounded-3xl relative overflow-hidden"
+                disabled={!isFormValid()} // Disable button if form is invalid
+                className={cn(
+                  "border border-white/30 px-8 py-2 rounded-3xl relative overflow-hidden",
+                  {
+                    "opacity-50 cursor-not-allowed": !isFormValid(),
+                  }
+                )}
               >
                 <TextReveal className="uppercase">Discuss Project</TextReveal>
               </motion.button>
             </Transition>
-            {formStatus && (
-              <div className="text-white/80 mt-4">{formStatus}</div>
+            {formStatus && <div className="text-white/80 mt-4">{formStatus}</div>}
+            {validationMessage && (
+              <div className="text-red-500 mt-2">{validationMessage}</div>
             )}
           </form>
-          {/* contact */}
+
+          {/* Contact Info */}
           <div className="md:justify-self-end flex flex-col">
-  <div className="pb-4">
-    <Transition>
-      <span className="text-white/90">Get in touch</span>
-    </Transition>
-    <div className="text-xl md:text-3xl font-bold py-2">
-      <Transition>
-        <TextReveal>dimuthnilanjana.official@gmail.com</TextReveal>
-      </Transition>
-    </div>
-    <Transition>
-      <div className="pb-1 text-white/80">+94 70 218 2603</div>
-    </Transition>
+            <div className="pb-4">
+              <Transition>
+                <span className="text-white/90">Get in touch</span>
+              </Transition>
+              <div className="text-xl md:text-3xl font-bold py-2">
+                <Transition>
+                  <TextReveal>dimuthnilanjana.official@gmail.com</TextReveal>
+                </Transition>
+              </div>
+              <Transition>
+                <div className="pb-1 text-white/80">+94 70 218 2603</div>
+              </Transition>
 
-    {/* Social Media Links */}
-    <div className="flex space-x-4 pt-4">
-      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
-        LinkedIn
-      </a>
-      <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
-        GitHub
-      </a>
-      <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">
-        Instagram
-      </a>
-    </div>
-  </div>
-</div>
-
+              {/* Social Media Links */}
+              <div className="flex space-x-4 pt-4">
+                <a
+                  href="https://www.linkedin.com/in/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-white"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-white"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://www.instagram.com/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-white"
+                >
+                  Instagram
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <footer className="flex items-center justify-between md:px-8 px-2 py-4 text-sm">
         <Transition>
           <div>&copy; {new Date().getFullYear()} ThePortfolio</div>

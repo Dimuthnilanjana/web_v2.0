@@ -41,7 +41,7 @@ const About = () => {
   };
 
   return (
-    <section className="grid md:grid-cols-[1.8fr_1fr] gap-x-10 py-20 px-4 md:px-8 relative" id="about">
+    <motion.section className="grid md:grid-cols-[1.8fr_1fr] gap-x-10 py-20 px-4 md:px-8 relative" id="about">
       <div>
         <h3 className="md:text-5xl text-2xl font-bold uppercase pb-8">
           <SlideIn>{about.quote}</SlideIn>
@@ -61,7 +61,7 @@ const About = () => {
           className="rounded-xl object-cover"
         />
       </div>
-    </section>
+    </motion.section>
   );
 };
 
