@@ -8,10 +8,6 @@ export interface About {
   subTitle: string;
   description: string;
   quote: string;
-  
-  
-  
- 
   avatar: Avatar;
  
 }
@@ -56,13 +52,7 @@ export interface Image {
   url: string;
 }
 
-export interface SocialHandle {
-  platform: string;
-  url: string;
-  image: Image;
-  enabled: boolean;
-  _id: string;
-}
+
 
 export interface Service {
   name: string;
