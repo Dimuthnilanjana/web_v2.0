@@ -39,7 +39,7 @@ export const Hero = () => {
               />
             </Transition>
             <div className="py-6 flex items-center flex-col">
-              <h2 className="md:text-7xl text-4xl font-bold overflow-hidden">
+              <h2 className="md:text-7xl text-4xl font-bold overflow-hidden text-center">
                 <SlideIn>Hello! I&apos;m {about.name}</SlideIn>
               </h2>
               <h1 className="md:text-7xl text-3xl overflow-hidden flex justify-center items-center pb-2">

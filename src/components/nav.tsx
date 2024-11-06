@@ -1,4 +1,5 @@
 // components/nav.tsx
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { perspective, slideIn } from "@/utils/anim";
@@ -10,9 +11,6 @@ interface NavProps {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   social: { platform: string; _id: string; url: string }[];
 }
-
-
-
 
 const Nav = ({ setIsActive, social }: NavProps) => {
   const MotionLink = motion(Link);
@@ -57,7 +55,22 @@ const Nav = ({ setIsActive, social }: NavProps) => {
         })}
       </div>
 
-     
+      {/* Download CV Button */}
+      <div className="mt-8">
+        <a
+          href="/path/to/your/cv.pdf"  // Replace with your actual CV path
+          download
+          className="w-full h-14 grid place-items-center bg-black text-white rounded-3xl"
+        >
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.1 }} // Hover effect
+            className="w-full h-full grid place-items-center rounded-3xl text-sm"
+          >
+            <TextReveal>Download CV</TextReveal>
+          </motion.button>
+        </a>
+      </div>
     </div>
   );
 };

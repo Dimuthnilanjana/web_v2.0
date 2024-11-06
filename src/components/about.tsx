@@ -26,11 +26,11 @@ const About = () => {
   // Static About Data
   const about: AboutType = {
     name: "John Doe",
-    subTitle: "Full Stack Developer",
-    quote: "Hello! I'm John Doe",
+    subTitle: "UI/UX Engineer",
+    quote: "Hello! I'm Dimuth Nilanjana",
     description:
-      "I am a software developer specializing in creating 3D visuals, user interfaces, and web applications.",
-    title: "Software Developer",
+      "I am a software engineer specializing in developing user interfaces, and web applications.",
+    title: "UI/UX Engineer",
    
     avatar: {
       url: "/shared/ai-generated-8083323_1280.jpg",
