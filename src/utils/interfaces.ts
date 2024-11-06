@@ -46,6 +46,9 @@ export interface Project {
   liveUrl: string;
   techStack: string[];
   sequence: number;
+  
+
+  enabled: boolean;
 }
 
 export interface Image {
