@@ -43,14 +43,7 @@ export const Dialog = ({ showDialog, setShowDialog }: DialogProps) => {
                     <h5 className="text-4xl font-bold">
                       {singleProject.title}
                     </h5>
-                    <div className="flex items-center gap-4">
-                      <Link href={singleProject.githuburl}>
-                        <Github />
-                      </Link>
-                      <Link href={singleProject.liveurl}>
-                        <ExternalLink />
-                      </Link>
-                    </div>
+                    
                   </div>
                   <div className="py-3 flex items-center gap-4">
                     {singleProject.techStack.map((tech, index) => (
