@@ -63,15 +63,15 @@ const Experience = () => {
               </div>
               <div className="max-md:text-sm max-md:flex flex-col text-foreground/50">
                 <span className="italic">
-                  {formatDate(exp.startDate).month +
+                  {formatDate(exp.startDate.toISOString()).month +
                     ", " +
-                    formatDate(exp.startDate).year}
+                    formatDate(exp.startDate.toISOString()).year}
                 </span>
                 <span className="max-md:hidden">{" - "}</span>
                 <span className="italic">
-                  {formatDate(exp.endDate).month +
+                  {formatDate(exp.endDate.toISOString()).month +
                     ", " +
-                    formatDate(exp.endDate).year}
+                    formatDate(exp.endDate.toISOString()).year}
                 </span>
               </div>
             </div>

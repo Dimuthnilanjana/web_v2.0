@@ -11,8 +11,8 @@ import ProjectContainer from "./ProjectContainer";
 const hardcodedProjects = [
   {
     _id: "1",
-    liveurl: "#",
-    githuburl: "#",
+    liveUrl: "https://dimuthnilanjana-com.vercel.app/",
+    githuburl: "https://dimuthnilanjana-com.vercel.app/",
     title: "Project 12",
     sequence: 12,
     image: {

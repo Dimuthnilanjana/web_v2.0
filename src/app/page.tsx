@@ -1,11 +1,9 @@
 // Home.tsx
 
-import { services } from "@/data/services";
-import { skills } from "@/data/skills";
+import { hardcodedData } from "@/data/portfolioData";
 import About from "@/components/about";
 import Header from "@/components/header";
 import Projects from "@/components/projects";
-
 import {
   HoverImageLink,
   ParallaxText,
@@ -14,65 +12,20 @@ import {
   TextReveal,
   Transition,
 } from "@/components/ui";
-
 import Experience from "@/components/experience";
 import { ContactUs } from "@/components/contact-us";
 import Link from "next/link";
 import { Hero } from "@/components/hero";
 
-// Define the hardcoded data for other sections
-const hardcodedData = {
-  about: {
-    title: "About Me",
-    description: "Passionate about creating impactful digital experiences...",
-  },
-  testimonials: [
-    {
-      _id: "1",
-      name: "John Doe",
-      feedback: "Great experience working with this team!",
-    },
-    // Add more testimonials as needed
-  ],
-  projects: [
-    {
-      liveUrl: "#",
-      githubUrl: "#",
-      title: "Project 12",
-      sequence: 12,
-      image: {
-        url: "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285416017-wra7swm",
-      },
-      description: "Lorem ipsum dolor sit amet...",
-      techStack: ["React", "Next.js", "MERN", "CSS"],
-      enabled: true,
-    },
-    // Add more projects as needed
-  ],
-  social_handles: {
-    github: "https://github.com/username",
-    linkedin: "https://linkedin.com/in/username",
-    // Add other social handles as needed
-  },
-  timeline: [
-    {
-      _id: "timeline1",
-      title: "Started Freelancing",
-      date: "2021",
-    },
-    // Add more timeline entries as needed
-  ],
-  email: "contact@portfolio.com",
-};
-
 export default function Home() {
   const {
     about,
-    testimonials,
-    projects,
+    
+    services,
+    skills,
+   
     social_handles,
-    timeline,
-    email,
+    
   } = hardcodedData;
 
   return (
@@ -83,39 +36,11 @@ export default function Home() {
         </Link>
       </Transition>
       <Header social={social_handles} />
-      <Hero about={about} />
-      <About about={about} timeline={timeline} />
-      <Experience timeline={timeline} />
+      <Hero />
+      <About  />
+      <Experience />
       {/* ===SKILLS SECTION=== */}
       <section id="skills">
-        <ParallaxText baseVelocity={-5}>
-          {skills
-            .sort((a, b) => a.sequence - b.sequence)
-            .map((skill) =>
-              skill.enabled ? (
-                <span
-                  key={skill._id}
-                  className="md:text-7xl text-xl font-semibold uppercase text-white/30"
-                >
-                  {skill.name} •
-                </span>
-              ) : null
-            )}
-        </ParallaxText>
-        <ParallaxText baseVelocity={5}>
-          {skills
-            .sort((a, b) => a.sequence - b.sequence)
-            .map((skill) =>
-              skill.enabled ? (
-                <span
-                  key={skill._id}
-                  className="md:text-7xl text-xl font-semibold uppercase text-white/30"
-                >
-                  {skill.name} •
-                </span>
-              ) : null
-            )}
-        </ParallaxText>
         <ParallaxText baseVelocity={-5}>
           {skills
             .sort((a, b) => a.sequence - b.sequence)
@@ -151,20 +76,15 @@ export default function Home() {
             </Transition>
           ))}
         </div>
-        <Transition className="flex items-center py-10 md:hidden">
-          <div className="p-4 rounded-full border border-white/50">
-            <span>Discuss the project</span>
-          </div>
-        </Transition>
       </section>
       {/* ===PROJECTS SECTION=== */}
-      <Projects data={projects} />
+      <Projects />
       {/* ===CONTACT US=== */}
       <div
         className="rounded-t-[2rem] md:rounded-t-[3rem] overflow-hidden"
         id="contact"
       >
-        <ContactUs email={email} about={about} social_handle={social_handles} />
+        <ContactUs />
       </div>
     </main>
   );

@@ -51,15 +51,20 @@ export interface Skill {
 }
 
 export interface Project {
-  liveurl: string;
-  githuburl: string;
+
   title: string;
-  sequence: number;
-  image: Image;
+
+  image: {
+
+    url: string;
+
+  };
+
   description: string;
+
+  liveUrl: string;
   techStack: string[];
-  _id: string;
-  enabled: boolean;
+  sequence: number;
 }
 
 export interface Image {
@@ -97,8 +102,8 @@ export interface Timeline {
   company_name: string;
   summary: string;
   sequence: number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   jobTitle: string;
   jobLocation: string;
   bulletPoints: string[];
