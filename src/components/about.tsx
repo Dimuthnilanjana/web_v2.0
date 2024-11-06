@@ -1,0 +1,55 @@
+"use client";
+
+import { About as AboutType, Timeline } from "@/utils/interfaces";
+import Image from "next/image";
+import { useState, Dispatch, SetStateAction } from "react";
+import { motion } from "framer-motion";
+import { SlideIn, Transition } from "./ui";
+
+
+const About = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Static About Data
+  const about: AboutType = {
+    name: "John Doe",
+    subTitle: "Full Stack Developer",
+    quote: "Hello! I'm John Doe",
+    description:
+      "I am a software developer specializing in creating 3D visuals, user interfaces, and web applications.",
+    title: "Software Developer",
+   
+    avatar: {
+      url: "/shared/ai-generated-8083323_1280.jpg",
+      public_id: "sample_public_id",
+      _id: "sample_id",
+    },
+   
+  };
+
+  return (
+    <section className="grid md:grid-cols-[1.8fr_1fr] gap-x-10 py-20 px-4 md:px-8 relative" id="about">
+      <div>
+        <h3 className="md:text-5xl text-2xl font-bold uppercase pb-8">
+          <SlideIn>{about.quote}</SlideIn>
+        </h3>
+        <Transition>
+          <p className="text-xl md:text-4xl text-foreground/50">{about.description}</p>
+        </Transition>
+        {/* Timeline rendering */}
+        
+      </div>
+      <div className="relative">
+        <Image
+          src={about.avatar.url}
+          width={400}
+          height={400}
+          alt={about.name}
+          className="rounded-xl object-cover"
+        />
+      </div>
+    </section>
+  );
+};
+
+export default About;
