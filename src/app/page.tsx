@@ -1,4 +1,4 @@
-// Home.tsx
+
 
 import { hardcodedData } from "@/data/portfolioData";
 import About from "@/components/about";
@@ -23,7 +23,7 @@ export default function Home() {
     
     services,
     skills,
-   
+    projects,
     social_handles,
     
   } = hardcodedData;
@@ -32,10 +32,10 @@ export default function Home() {
     <main className="relative">
       <Transition className="fixed md:top-8 top-6 md:left-8 left-6 z-30 hover:text-white/80 text-white/40">
         <Link href={"/"}>
-          <TextReveal className="font-semibold">ThePortfolio</TextReveal>
+          <TextReveal className="font-semibold">Dimuth Nilanjana</TextReveal>
         </Link>
       </Transition>
-      <Header social={social_handles} />
+      {/* <Header social={social_handles} /> */}
       <Hero />
       <About  />
       <Experience />
