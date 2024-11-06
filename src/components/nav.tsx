@@ -5,12 +5,14 @@ import { perspective, slideIn } from "@/utils/anim";
 import { TextReveal } from "./ui";
 import { ArrowRight } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-import { SocialHandle } from "@/utils/interfaces";
 
 interface NavProps {
   setIsActive: Dispatch<SetStateAction<boolean>>;
-  social: SocialHandle[];
+  social: { platform: string; _id: string; url: string }[];
 }
+
+
+
 
 const Nav = ({ setIsActive, social }: NavProps) => {
   const MotionLink = motion(Link);

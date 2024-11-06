@@ -24,7 +24,7 @@ export default function Home() {
     services,
     skills,
     projects,
-    social_handles,
+    
     
   } = hardcodedData;
 

@@ -5,13 +5,7 @@ export const hardcodedData = {
     title: "About Me",
     description: "Passionate about creating impactful digital experiences...",
   },
-  testimonials: [
-    {
-      _id: "1",
-      name: "John Doe",
-      feedback: "Great experience working with this team!",
-    },
-  ],
+ 
   services: [
     {
       _id: "service1",
@@ -43,16 +37,7 @@ export const hardcodedData = {
       enabled: true,
     },
   ],
-  social_handles: {
-    github: "https://github.com/username",
-    linkedin: "https://linkedin.com/in/username",
-  },
-  timeline: [
-    {
-      _id: "timeline1",
-      title: "Started Freelancing",
-      date: "2021",
-    },
-  ],
+
+
   email: "contact@portfolio.com",
 };
