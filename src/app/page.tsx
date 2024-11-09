@@ -16,7 +16,7 @@ import Experience from "@/components/experience";
 import { ContactUs } from "@/components/contact-us";
 import Link from "next/link";
 import { Hero } from "@/components/hero";
-import { Clients } from "@/components/cilients";
+
 
 export default function Home() {
   const {
@@ -40,7 +40,7 @@ export default function Home() {
       <Hero />
       <About  />
       <Experience />
-      <Clients/>
+      
      
 
       {/* ===SKILLS SECTION=== */}
