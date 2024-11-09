@@ -1,13 +1,7 @@
 "use client";
 
 import { useCursorVariants } from "@/utils/context";
-import {
-  useMotionValue,
-  useSpring,
-  motion,
-  AnimationProps,
-  Variants,
-} from "framer-motion";
+import { useMotionValue, useSpring, motion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect } from "react";
 
@@ -24,8 +18,7 @@ export const Cursor = () => {
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       requestAnimationFrame(() => {
-        // Update position only on animation frame
-        cursorX.set(e.clientX - (variant === "PROJECT" ? 32 : 8)); // Adjust offset based on variant
+        cursorX.set(e.clientX - (variant === "PROJECT" ? 32 : 8));
         cursorY.set(e.clientY - (variant === "PROJECT" ? 32 : 8));
       });
     };
@@ -35,7 +28,7 @@ export const Cursor = () => {
     return () => {
       window.removeEventListener("mousemove", moveCursor);
     };
-  }, [variant]);
+  }, [variant, cursorX, cursorY]); // Adding cursorX and cursorY to dependencies
 
   const variants: Variants = {
     DEFAULT: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/utils/cn";
 
 interface TestimonialProps {
@@ -12,61 +12,50 @@ interface TestimonialProps {
 }
 
 export const InfiniteScroll = ({
-  direction,
-  speed,
-  pauseOnHover,
+  direction = "left",
+  speed = "normal",
+  pauseOnHover = true,
   children,
   className,
 }: TestimonialProps) => {
   const [start, setStart] = useState(false);
-
   const scrollerRef = useRef<HTMLUListElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    addAnimation();
-  }, []);
-  function addAnimation() {
+  // Define addAnimation as a callback to use in useEffect dependency array
+  const addAnimation = useCallback(() => {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
+      // Duplicate each item for infinite scroll effect
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
+        scrollerRef.current?.appendChild(duplicatedItem);
       });
 
       getDirection();
       getSpeed();
       setStart(true);
     }
-  }
+  }, [direction, speed]);
+
+  useEffect(() => {
+    addAnimation();
+  }, [addAnimation]);
 
   const getDirection = () => {
     if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
+      containerRef.current.style.setProperty(
+        "--animation-direction",
+        direction === "left" ? "forwards" : "reverse"
+      );
     }
   };
+
   const getSpeed = () => {
     if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
+      const duration = speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s";
+      containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
 
@@ -77,8 +66,8 @@ export const InfiniteScroll = ({
     >
       <ul
         className={cn(
-          "flex items-center justify-center gap-4 flex-nowrap  shrink-0 w-max",
-          start && "animate-scroll ",
+          "flex items-center justify-center gap-4 flex-nowrap shrink-0 w-max",
+          start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]",
           className
         )}
