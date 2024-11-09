@@ -5,7 +5,6 @@ import React, {
   useState,
   useContext,
   useEffect,
-  useCallback,
   Dispatch,
   SetStateAction,
 } from "react";
@@ -35,6 +34,7 @@ const ProjectsContext = createContext<ProjectContextProps>({
   setSingleProject: () => {},
 });
 
+// ProjectsProvider component to manage and expose context values
 const ProjectsProvider = ({
   children,
   data,
@@ -48,29 +48,28 @@ const ProjectsProvider = ({
   const [sort, setSort] = useState(false);
   const [singleProject, setSingleProject] = useState<Project | null>(null);
 
-  const applyFilters = useCallback(
-    (data: Project[], filterValues: string) => {
-      if (filterValues === "all") return data;
-
-      return data.filter((project) =>
-        project.techStack.some((tech) => filterValues === tech.trim())
-      );
-    },
-    []
-  );
-
   useEffect(() => {
     const filtered = applyFilters(projects, appliedFilter);
     setFilteredProjects(filtered);
-  }, [appliedFilter, projects, applyFilters]);
+  }, [appliedFilter, projects]);
 
   useEffect(() => {
     if (sort) {
-      const sorted = projects.slice().sort((a, b) => a.sequence - b.sequence);
+      const sorted = projects.toSorted((a, b) => a.sequence - b.sequence);
       setFilteredProjects(sorted);
       setProjects(sorted);
     }
-  }, [sort, projects]);
+  }, [sort]);
+
+  const applyFilters = (data: Project[], filterValues: string) => {
+    if (filterValues === "all") {
+      return data;
+    }
+
+    return data.filter((project) =>
+      project.techStack.some((tech) => filterValues === tech.trim())
+    );
+  };
 
   const value = {
     projects,
@@ -91,6 +90,7 @@ const ProjectsProvider = ({
   );
 };
 
+// Custom hook to consume the ProjectsContext
 const useProjects = () => {
   const context = useContext(ProjectsContext);
   if (context === undefined) {

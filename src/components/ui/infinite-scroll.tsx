@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/cn";
 
 interface TestimonialProps {
@@ -8,13 +8,13 @@ interface TestimonialProps {
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const InfiniteScroll = ({
-  direction = "left",
-  speed = "normal",
-  pauseOnHover = false,
+  direction,
+  speed,
+  pauseOnHover,
   children,
   className,
 }: TestimonialProps) => {
@@ -23,27 +23,13 @@ export const InfiniteScroll = ({
   const scrollerRef = useRef<HTMLUListElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // useCallback hooks for getDirection and getSpeed to avoid missing dependencies warnings
-  const getDirection = useCallback(() => {
-    if (containerRef.current) {
-      const directionValue = direction === "left" ? "forwards" : "reverse";
-      containerRef.current.style.setProperty("--animation-direction", directionValue);
-    }
-  }, [direction]);
-
-  const getSpeed = useCallback(() => {
-    if (containerRef.current) {
-      const speedValue = speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s";
-      containerRef.current.style.setProperty("--animation-duration", speedValue);
-    }
-  }, [speed]);
-
-  // Add animation logic when the component is mounted
-  const addAnimation = useCallback(() => {
+  useEffect(() => {
+    addAnimation();
+  }, []);
+  function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
-      // Clone each item for infinite scroll effect
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
         if (scrollerRef.current) {
@@ -51,17 +37,38 @@ export const InfiniteScroll = ({
         }
       });
 
-      // Apply direction and speed once the content is loaded
       getDirection();
       getSpeed();
       setStart(true);
     }
-  }, [getDirection, getSpeed]);
+  }
 
-  // Trigger animation setup when component mounts
-  useEffect(() => {
-    addAnimation();
-  }, [addAnimation]);
+  const getDirection = () => {
+    if (containerRef.current) {
+      if (direction === "left") {
+        containerRef.current.style.setProperty(
+          "--animation-direction",
+          "forwards"
+        );
+      } else {
+        containerRef.current.style.setProperty(
+          "--animation-direction",
+          "reverse"
+        );
+      }
+    }
+  };
+  const getSpeed = () => {
+    if (containerRef.current) {
+      if (speed === "fast") {
+        containerRef.current.style.setProperty("--animation-duration", "20s");
+      } else if (speed === "normal") {
+        containerRef.current.style.setProperty("--animation-duration", "40s");
+      } else {
+        containerRef.current.style.setProperty("--animation-duration", "80s");
+      }
+    }
+  };
 
   return (
     <div
@@ -70,8 +77,8 @@ export const InfiniteScroll = ({
     >
       <ul
         className={cn(
-          "flex items-center justify-center gap-4 flex-nowrap shrink-0 w-max",
-          start && "animate-scroll",
+          "flex items-center justify-center gap-4 flex-nowrap  shrink-0 w-max",
+          start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]",
           className
         )}
