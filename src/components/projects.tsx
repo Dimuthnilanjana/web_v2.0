@@ -24,7 +24,7 @@ const hardcodedProjects = [
     techStack: ["Reactjs"],
     enabled: true,
   },
-  // Add more projects as needed
+  // Add more projects as neededdd
   {
     _id: "1",
     liveUrl: "https://dimuthnilanjana-com.vercel.app/",
